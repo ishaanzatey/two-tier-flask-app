@@ -1,4 +1,3 @@
-@Library("Shared") _
 pipeline{
     
     agent { label "dev"};
@@ -40,25 +39,6 @@ pipeline{
         stage("Deploy"){
             steps{
                 sh "docker compose up -d --build flask-app"
-            }
-        }
-    }
-
-post{
-        success{
-            script{
-                emailext from: 'mentor@trainwithshubham.com',
-                to: 'mentor@trainwithshubham.com',
-                body: 'Build success for Demo CICD App',
-                subject: 'Build success for Demo CICD App'
-            }
-        }
-        failure{
-            script{
-                emailext from: 'mentor@trainwithshubham.com',
-                to: 'mentor@trainwithshubham.com',
-                body: 'Build Failed for Demo CICD App',
-                subject: 'Build Failed for Demo CICD App'
             }
         }
     }
